@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/dgp-xp-app",
+    "allowJs": true,
+    "declaration": true,
+    "types": [
+      "lodash",
+      "node"
+    ]
+  },
+  "files": [
+    "src/public-api.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "dgp-xp-app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": "false",
+  "main": "public-api.js",
+  "dependencies": {
+    "injection-js": "^2.4.0"
+  }
+}
