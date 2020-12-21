@@ -1,0 +1,21 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/sample-app",
+        "allowJs": true,
+        "types": [
+            "lodash",
+            "node"
+        ]
+    },
+    "files": [
+      "src/main"
+    ],
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/test.ts",
+        "src/**/*.spec.ts"
+    ]
+}

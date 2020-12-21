@@ -30,6 +30,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+dist/
+projects/sample-app/build/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -431,9 +433,3 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-
-
-##
-## Qm.Labs
-##
-server/eviyos-viewer.db

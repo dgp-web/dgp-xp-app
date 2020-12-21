@@ -1,0 +1,7 @@
+{
+  "ext": "js,ts",
+  "watch": [
+    "src"
+  ],
+  "exec": "cpx src/app/assets/**/* ../../dist/sample-app/src/app/assets && tsoa spec-and-routes && tsc -p tsconfig.app.json && node ../../dist/sample-app/src/main.js"
+}

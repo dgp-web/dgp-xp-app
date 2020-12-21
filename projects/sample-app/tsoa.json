@@ -1,0 +1,17 @@
+{
+  "entryFile": "src/main.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": [
+    "src/**/*.controller.ts"
+  ],
+  "spec": {
+    "outputDirectory": "build",
+    "specVersion": 3,
+    "specMerging": "recursive"
+  },
+  "routes": {
+    "routesDir": "build",
+    "iocModule": "src/app/ioc",
+    "authenticationModule": "src/app/authentication"
+  }
+}
