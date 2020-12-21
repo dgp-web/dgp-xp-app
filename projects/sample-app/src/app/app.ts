@@ -1,12 +1,12 @@
 import { AppConfig } from "./models/app-config.model";
 import { ReflectiveInjector } from "injection-js";
-import { setRootInjector } from "./util/root-injector";
 import * as swaggerUi from "swagger-ui-express";
 import { Application } from "express";
 import { initializationRequestHandler } from "./util/initialization-request-handler";
 import { removeStartupRoute } from "./util/remove-startup-route.function";
 import { UserController } from "./controllers/user.controller";
 import { RegisterRoutes } from "../../build/routes";
+import { setRootInjector } from "../../../dgp-xp-app/src/public-api";
 import express = require("express");
 import bodyParser = require("body-parser");
 

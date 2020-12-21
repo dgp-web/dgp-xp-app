@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dgp-xp-app:build": "cpx projects/dgp-xp-app/package.json dist/dgp-xp-app && tsc -p projects/dgp-xp-app/tsconfig.lib.json",
+    "dgp-xp-app:publish": "cd dist/dgp-xp-app && npm publish",
     "sample-app:serve": "cd projects/sample-app && nodemon"
   },
   "dependencies": {

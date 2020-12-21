@@ -1,8 +1,8 @@
 {
   "name": "dgp-xp-app",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "license": "MIT",
-  "private": "false",
+  "private": false,
   "main": "public-api.js",
   "dependencies": {
     "injection-js": "^2.4.0"

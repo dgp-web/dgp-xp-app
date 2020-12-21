@@ -1,5 +1,5 @@
 import { IocContainer, IocContainerFactory } from "@tsoa/runtime";
-import { getRootInjector } from "./util/root-injector";
+import { getRootInjector } from "../../../dgp-xp-app/src/public-api";
 
 export class Container implements IocContainer {
 
