@@ -1,6 +1,6 @@
 {
   "name": "dgp-xp-app",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "license": "MIT",
   "private": false,
   "main": "public-api.js",
