@@ -1,4 +1,3 @@
-import * as path from "path";
 import * as express from "express";
 import { Application } from "express";
 import * as cors from "cors";
@@ -17,7 +16,7 @@ export interface AppConfig {
     readonly appName: string;
     readonly assetsDir: string;
     readonly assetsRoute: string;
-    readonly clientAppPath: string;
+    readonly clientAppDir: string;
     readonly swaggerUIOptions: SwaggerUiOptions;
     readonly swaggerRoute: string;
     readonly swaggerJson: any;
@@ -28,9 +27,8 @@ export interface AppConfig {
     readonly initializationRequestHandler: InitializationRequestHandler;
 }
 
-export const defaultAppConfig: Partial<AppConfig> = {
+export const defaultAppConfig = {
     appName: "Application",
-    assetsDir: "./assets",
     assetsRoute: "/assets",
     swaggerUIOptions: {
         customSiteTitle: "App",
@@ -42,7 +40,7 @@ export const defaultAppConfig: Partial<AppConfig> = {
     },
     bodyParserOptionsUrlEncoded: {extended: true},
     port: 3000
-};
+} as AppConfig;
 
 export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
 
@@ -53,11 +51,10 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
     ) {
         this.app = express();
 
-        const assetsDistPath = path.join(__dirname, this.config.assetsDir);
-
         this.app.use(cors(this.config.corsOptions));
 
-        this.app.use(this.config.assetsRoute, express.static(assetsDistPath));
+        this.app.use(express.static(this.config.clientAppDir));
+        this.app.use(this.config.assetsRoute, express.static(this.config.assetsDir));
         this.app.use(bodyParser.urlencoded(this.config.bodyParserOptionsUrlEncoded));
         this.app.use(bodyParser.json(this.config.bodyParserOptionsJson));
     }
@@ -69,7 +66,6 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
     }
 
     private async initialize$(app: Application) {
-        const appDistPath = path.join(__dirname, this.config.clientAppPath);
 
         app.use("*", this.config.initializationRequestHandler);
 
@@ -82,7 +78,7 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
         app.use(errorHandler);
 
         app.get("/*", (req, res) => {
-            res.sendFile(appDistPath + "/index.html");
+            res.sendFile(this.config.clientAppDir + "/index.html");
         });
 
         await this.runStartupTasks();
