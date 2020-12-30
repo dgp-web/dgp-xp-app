@@ -7,6 +7,7 @@ import { SwaggerUiOptions } from "swagger-ui-express";
 import { OptionsJson, OptionsUrlencoded } from "body-parser";
 import { errorHandler } from "./error-handler";
 import { removeRouteHandler } from "./remove-route-handler.function";
+import { isNullOrUndefined } from "util";
 import bodyParser = require("body-parser");
 
 export type InitializationRequestHandler = (err: unknown, req: express.Request,
@@ -34,7 +35,7 @@ export const defaultAppConfig = {
         customSiteTitle: "App",
         customfavIcon: "/assets/favicon.ico"
     },
-    swaggerRoute: "/docs",
+    swaggerRoute: "/api/docs",
     bodyParserOptionsJson: {
         limit: "50mb"
     },
@@ -60,33 +61,34 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
     }
 
     start() {
-        this.initialize$(this.app).then(() => this.app.listen(this.config.port, () => {
+        this.init$(this.app).then(() => this.app.listen(this.config.port, () => {
             console.log(this.config.appName + " has started.");
         }));
     }
 
-    private async initialize$(app: Application) {
+    private async init$(app: Application) {
 
-        app.use("*", this.config.initializationRequestHandler);
+        if (!isNullOrUndefined(this.config.initializationRequestHandler)) {
+            app.use("*", this.config.initializationRequestHandler);
+        }
 
         app.use(this.config.swaggerRoute, swaggerUi.serve,
             swaggerUi.setup(this.config.swaggerJson, this.config.swaggerUIOptions), async (_req, res) => {
                 return res.send(swaggerUi.generateHTML(this.config.swaggerJson));
             });
 
-        await this.init$(app);
+        await this.initialize$(app);
         app.use(errorHandler);
 
         app.get("/*", (req, res) => {
             res.sendFile(this.config.clientAppDir + "/index.html");
         });
 
-        await this.runStartupTasks();
-        removeRouteHandler(app, this.config.initializationRequestHandler.name);
+        if (!isNullOrUndefined(this.config.initializationRequestHandler)) {
+            removeRouteHandler(app, this.config.initializationRequestHandler.name);
+        }
     }
 
-    protected abstract init$(app: Application);
-
-    protected abstract runStartupTasks(): Promise<void>;
+    protected abstract initialize$(app: Application);
 
 }
