@@ -15,11 +15,12 @@ export function errorHandler(
             details: err?.fields,
         });
     }
+
     if (err instanceof Error) {
 
-        const status = (err as any).status;
+        const status = (err as any).status || 500;
 
-        return res.status((err as any).status).json({
+        return res.status(status).json({
             status,
             name: err.name,
             message: err.message
