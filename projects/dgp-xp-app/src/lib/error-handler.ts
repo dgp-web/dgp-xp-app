@@ -25,7 +25,18 @@ export function errorHandler(
             name: err.name,
             message: err.message
         });
+    } else {
+
+        const status = (err as any).status || 500;
+
+        return res.status(status).json({
+            status,
+            name: (err as any).name || "Internal Server Error",
+            message: (err as any).message || JSON.stringify(err)
+        });
+
     }
+
 
     next();
 }
