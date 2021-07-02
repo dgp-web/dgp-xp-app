@@ -30,6 +30,12 @@ export function createSSEMiddleware<T>(obs$: Observable<T>, config: SSEMiddleWar
             res.setHeader("Cache-Control", "no-cache");
             res.setHeader("Connection", "keep-alive");
             res.setHeader("Content-Type", "text/event-stream");
+            /**
+             * This is needed so requests don't get buffered for HTTPS
+             * -----
+             * See https://stackoverflow.com/questions/13672743/eventsource-server-sent-events-through-nginx
+             */
+            res.setHeader("X-Accel-Buffering", "no");
             res.setHeader("Access-Control-Allow-Origin", config.headers["Access-Control-Allow-Origin"]);
             res.flushHeaders(); // flush the headers to establish SSE with client
 
