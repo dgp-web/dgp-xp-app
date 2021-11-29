@@ -1,7 +1,7 @@
 import { DgpXpModuleRef } from "../models";
 import { DgpXpApp } from "../dgp-xp-app";
 import "reflect-metadata";
-import { metadataKVS } from "./dgp-xp-module.function";
+import { decoratorMetadataKVS } from "./dgp-xp-module.function";
 
 // https://stackoverflow.com/questions/41144335/get-list-of-attribute-decorators-in-typescript
 export function getDecorators(target: any, propertyName: string | symbol): string[] {
@@ -25,7 +25,7 @@ export function bootstrapModule<TModule>(payload: TModule): Promise<DgpXpModuleR
     // TODO: Pass providers in there
     // TODO: Get metadata
 
-    const asda = metadataKVS[(payload as any).name];
+    const asda = decoratorMetadataKVS[(payload as any).name];
     console.log("metadata of ", (payload as any).name, asda);
 
     // new DgpXpApp({} as any);

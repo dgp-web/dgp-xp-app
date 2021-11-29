@@ -1,19 +1,34 @@
-import { DgpXpModuleContent } from "../models";
-import "reflect-metadata";
+import { DgpXpModuleMetadata } from "../models";
+import { Type } from "injection-js";
 
-export const metadataKVS = {};
+export const decoratorMetadataKVS = {};
 
-export function DgpXpModule(payload: DgpXpModuleContent): any {
+export function registerDecoratorMetadata<TMetadata = any>(payload: {
+    readonly decoratedClass: Type;
+    readonly metadata: TMetadata;
+}): void {
+    decoratorMetadataKVS[payload.decoratedClass.name] = payload.metadata;
+}
 
-    // console.log("payload", payload);
-    // TODO: Collect all providers into some central repository
+export function getDecoratorMetadata<TMetadata>(decoratedClass: Type): TMetadata {
+    return decoratorMetadataKVS[decoratedClass.name];
+}
 
-    return (decoratedClass: any) => {
+export function registerDgpXpModuleMetadata(payload: {
+    readonly decoratedClass: Type;
+    readonly metadata: DgpXpModuleMetadata;
+}) {
+    registerDecoratorMetadata<DgpXpModuleMetadata>(payload);
+}
 
-        metadataKVS[decoratedClass.name] = payload;
+export function getDgpXpModuleMetadata(decoratedClass: Type): DgpXpModuleMetadata {
+    return getDecoratorMetadata<DgpXpModuleMetadata>(decoratedClass);
+}
 
-        //  console.log("decoratedClass", decoratedClass);
-        // Reflect.defineMetadata("custom:annotations:test", "test", decoratedClass, "any");
+export function DgpXpModule(metadata: DgpXpModuleMetadata): any {
+
+    return (decoratedClass: Type) => {
+        registerDgpXpModuleMetadata({decoratedClass, metadata});
     };
 
 }
