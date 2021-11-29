@@ -1,32 +1,13 @@
 import { DgpXpModuleRef } from "../models";
-import { DgpXpApp } from "../dgp-xp-app";
-import "reflect-metadata";
-import { decoratorMetadataKVS } from "./dgp-xp-module.function";
+import { getDgpXpModuleMetadata } from "./get-dgp-xp-module-metadata.function";
+import { Type } from "injection-js";
 
-// https://stackoverflow.com/questions/41144335/get-list-of-attribute-decorators-in-typescript
-export function getDecorators(target: any, propertyName: string | symbol): string[] {
-    // get info about keys that used in current property
-    console.log("Reflect.getMetadataKeys", Reflect.getMetadataKeys(target));
-    const keys: any[] = Reflect.getMetadataKeys(target, propertyName);
-    const decorators = keys
-        // filter your custom decorators
-        .filter(key => key.toString().startsWith("custom:annotations"))
-        .reduce((values, key) => {
-            // get metadata value.
-            const currValues = Reflect.getMetadata(key, target, propertyName);
-            return values.concat(currValues);
-        }, []);
+export function bootstrapModule<TModule extends Type>(
+    payload: TModule
+): Promise<DgpXpModuleRef<TModule>> {
 
-    return decorators;
-}
-
-export function bootstrapModule<TModule>(payload: TModule): Promise<DgpXpModuleRef<TModule>> {
-
-    // TODO: Pass providers in there
-    // TODO: Get metadata
-
-    const asda = decoratorMetadataKVS[(payload as any).name];
-    console.log("metadata of ", (payload as any).name, asda);
+    const metadata = getDgpXpModuleMetadata(payload);
+    console.log("metadata of ", payload.name, metadata);
 
     // new DgpXpApp({} as any);
 
