@@ -19,6 +19,12 @@
     "lib": [
       "dom",
       "es2018"
-    ]
+    ],
+    "paths": {
+      "dgp-xp-app": [
+        "dist/dgp-xp-app/public-api",
+        "dist/dgp-xp-app"
+      ]
+    }
   }
 }

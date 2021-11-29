@@ -1,3 +1,6 @@
+export * from "./lib/functions";
+export * from "./lib/models";
+
 export * from "./lib/authentication-scheme.model";
 export * from "./lib/create-sse-middleware.function";
 export * from "./lib/credentials.model";

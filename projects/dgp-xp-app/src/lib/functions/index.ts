@@ -1,0 +1,1 @@
+export * from "./dgp-xp-module.function";
