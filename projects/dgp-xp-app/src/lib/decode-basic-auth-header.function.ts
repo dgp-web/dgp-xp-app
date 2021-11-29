@@ -1,4 +1,4 @@
-import { Credentials } from "./credentials.model";
+import { Credentials } from "./features/authentication/models/credentials.model";
 
 const crypto = require("crypto");
 

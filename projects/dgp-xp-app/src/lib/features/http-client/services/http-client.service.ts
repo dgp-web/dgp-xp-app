@@ -1,8 +1,9 @@
 import { Inject, Injectable } from "injection-js";
 import * as fetch from "node-fetch";
-import { Environment } from "../../../dgp-xp-app";
-import { defaultHttpsAgent, ENVIRONMENT } from "../constants";
+import { defaultHttpsAgent } from "../constants";
 import { NodeFetchRequestConfig } from "../models";
+import { ENVIRONMENT } from "../../../constants";
+import { Environment } from "../../../models/environment.model";
 
 @Injectable()
 export class HttpClient {

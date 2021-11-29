@@ -1,6 +1,7 @@
 import * as express from "express";
 import { ValidateError } from "@tsoa/runtime";
 
+// TODO: Make injectable
 export function errorHandler(
     err: unknown,
     req: express.Request,

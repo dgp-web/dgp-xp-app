@@ -1,6 +1,6 @@
 import * as express from "express";
 import { Observable } from "rxjs";
-import { Authentication } from "./authentication-scheme.model";
+import { Authentication } from "./features/authentication/models";
 
 export interface SSEMiddleWareConfig {
     readonly headers: {

@@ -1,8 +1,12 @@
-import { DgpXpModule, HttpClientModule } from "dgp-xp-app";
+import { AuthenticationModule, DgpXpModule, HttpClientModule, OpenApiModule } from "dgp-xp-app";
 
 @DgpXpModule({
     imports: [
-        HttpClientModule
+        AuthenticationModule,
+        HttpClientModule,
+        OpenApiModule.forRoot({
+            openApiJsonPath: "../../swagger.json"
+        })
     ],
     providers: []
 })

@@ -1,51 +1,14 @@
 import * as express from "express";
 import { Application } from "express";
 import * as cors from "cors";
-import { CorsOptions } from "cors";
 import * as swaggerUi from "swagger-ui-express";
-import { SwaggerUiOptions } from "swagger-ui-express";
-import { OptionsJson, OptionsUrlencoded } from "body-parser";
-import { errorHandler } from "./error-handler";
-import { removeRouteHandler } from "./remove-route-handler.function";
+import { errorHandler } from "./functions/error-handler";
 import { isNullOrUndefined } from "util";
+import { AppConfig } from "./models";
+import { removeRouteHandler } from "./functions/remove-route-handler.function";
 import bodyParser = require("body-parser");
 
-export type InitializationRequestHandler = (err: unknown, req: express.Request,
-                                            res: express.Response, next: express.NextFunction) => express.Response | void;
-
-export interface Environment {
-    readonly isDevelopment?: boolean;
-}
-
-export interface AppConfig extends Environment {
-    readonly appName: string;
-    readonly assetsDir: string;
-    readonly assetsRoute: string;
-    readonly clientAppDir: string;
-    readonly swaggerUIOptions: SwaggerUiOptions;
-    readonly swaggerRoute: string;
-    readonly swaggerJson: any;
-    readonly bodyParserOptionsJson: OptionsJson;
-    readonly bodyParserOptionsUrlEncoded: OptionsUrlencoded;
-    readonly port: number;
-    readonly corsOptions: CorsOptions;
-    readonly initializationRequestHandler: InitializationRequestHandler;
-}
-
-export const defaultAppConfig = {
-    appName: "Application",
-    assetsRoute: "/assets",
-    swaggerUIOptions: {
-        customSiteTitle: "App",
-        customfavIcon: "/assets/favicon.ico"
-    },
-    swaggerRoute: "/api/docs",
-    bodyParserOptionsJson: {
-        limit: "50mb"
-    },
-    bodyParserOptionsUrlEncoded: {extended: true},
-    port: 3000
-} as AppConfig;
+// TODO: Extract InitializationModule
 
 export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
 
