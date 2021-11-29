@@ -1,12 +1,12 @@
-import { DgpXpModuleContent } from "../models";
+import { DgpXpModuleContent, DgpXpModuleRef } from "../models";
 
 export function DgpXpModule(payload: DgpXpModuleContent): any {
 
     console.log("payload", payload);
-    // TODO: Do something with this rant
+    // TODO: Collect all providers into some central repository
 
-    return (foo: any) => {
-        console.log("foo", foo);
+    return (decoratedClass: any) => {
+        console.log("decoratedClass", decoratedClass);
     };
 
 }

@@ -13,7 +13,11 @@ import bodyParser = require("body-parser");
 export type InitializationRequestHandler = (err: unknown, req: express.Request,
                                             res: express.Response, next: express.NextFunction) => express.Response | void;
 
-export interface AppConfig {
+export interface Environment {
+    readonly isDevelopment?: boolean;
+}
+
+export interface AppConfig extends Environment {
     readonly appName: string;
     readonly assetsDir: string;
     readonly assetsRoute: string;

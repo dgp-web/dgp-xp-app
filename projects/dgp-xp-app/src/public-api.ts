@@ -1,3 +1,4 @@
+export * from "./lib/features";
 export * from "./lib/functions";
 export * from "./lib/models";
 

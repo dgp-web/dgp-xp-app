@@ -1,14 +1,11 @@
+import { bootstrapModule } from "dgp-xp-app";
 import "./polyfills";
-import { App } from "./app/app";
+import { AppModule } from "./app.module";
 
-import { DgpXpModule } from "dgp-xp-app";
+bootstrapModule(AppModule)
+    .then(() => console.log("Sample app has started."));
 
-@DgpXpModule({
-    providers: []
-})
-export class AppModule {
-
-}
-
+/*
 const app = new App({isDevelopment: true});
 app.init$().then(() => console.log("Sample app has started."));
+*/
