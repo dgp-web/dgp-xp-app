@@ -1,5 +1,5 @@
 import { DgpXpModule } from "../../functions";
 
-@DgpXpModule()
+@DgpXpModule({})
 export class InitializationModule {
 }

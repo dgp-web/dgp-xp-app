@@ -1,12 +1,19 @@
-import { DgpXpModuleContent, DgpXpModuleRef } from "../models";
+import { DgpXpModuleContent } from "../models";
+import "reflect-metadata";
 
-export function DgpXpModule(payload?: DgpXpModuleContent): any {
+export const metadataKVS = {};
 
-    console.log("payload", payload);
+export function DgpXpModule(payload: DgpXpModuleContent): any {
+
+    // console.log("payload", payload);
     // TODO: Collect all providers into some central repository
 
     return (decoratedClass: any) => {
-        console.log("decoratedClass", decoratedClass);
+
+        metadataKVS[decoratedClass.name] = payload;
+
+        //  console.log("decoratedClass", decoratedClass);
+        // Reflect.defineMetadata("custom:annotations:test", "test", decoratedClass, "any");
     };
 
 }
