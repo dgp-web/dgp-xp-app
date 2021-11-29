@@ -2,10 +2,9 @@ import * as express from "express";
 import { Application } from "express";
 import * as cors from "cors";
 import * as swaggerUi from "swagger-ui-express";
-import { errorHandler } from "./functions/error-handler";
+import { errorHandler, removeRouteHandler } from "./functions";
 import { isNullOrUndefined } from "util";
 import { AppConfig } from "./models";
-import { removeRouteHandler } from "./functions/remove-route-handler.function";
 import bodyParser = require("body-parser");
 
 // TODO: Extract InitializationModule
@@ -14,6 +13,7 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
 
     private app: Application;
 
+    // TODO: Compose appConfig via modules
     protected constructor(
         protected readonly config: TAppConfig
     ) {
