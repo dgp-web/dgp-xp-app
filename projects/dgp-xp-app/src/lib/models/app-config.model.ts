@@ -1,7 +1,7 @@
 import { Environment } from "./environment.model";
 import { SwaggerUiOptions } from "swagger-ui-express";
 import { OptionsJson, OptionsUrlencoded } from "body-parser";
-import { InitializationRequestHandler } from "./initialization-request-handler.model";
+import { InitializationConfig } from "../features/initialization/models/initialization-config.model";
 
 export interface OpenApiConfig {
     readonly swaggerUIOptions: SwaggerUiOptions;
@@ -33,10 +33,6 @@ export interface AppHostingOptions {
 
 export interface WithCorsOptions {
     readonly corsOptions: any;
-}
-
-export interface InitializationConfig {
-    readonly initializationRequestHandler: InitializationRequestHandler;
 }
 
 export interface AppConfig extends AppMetadata,
