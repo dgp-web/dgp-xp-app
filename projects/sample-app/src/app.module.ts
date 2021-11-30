@@ -1,4 +1,5 @@
 import { AuthenticationModule, DgpXpModule, HttpClientModule, OpenApiModule } from "dgp-xp-app";
+import { UserController } from "./app/controllers/user.controller";
 
 @DgpXpModule({
     imports: [
@@ -8,7 +9,10 @@ import { AuthenticationModule, DgpXpModule, HttpClientModule, OpenApiModule } fr
             openApiJsonPath: "../../swagger.json"
         })
     ],
-    providers: []
+    providers: [],
+    controllers: [
+        UserController
+    ]
 })
 export class AppModule {
 }

@@ -7,3 +7,4 @@ export { registerDecoratorMetadata } from "./register-decorator-metadata.functio
 export { getDecoratorMetadata } from "./get-decorator-metadata.function";
 export { registerDgpXpModuleMetadata } from "./register-dgp-xp-module-metadata.function";
 export { getDgpXpModuleMetadata } from "./get-dgp-xp-module-metadata.function";
+export { getNestedDgpXpModuleMetadata } from "./get-nested-dgp-xp-module-metadata.function";

@@ -11,29 +11,29 @@ import bodyParser = require("body-parser");
 
 export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
 
-    private app: Application;
+    private expressApp: Application;
 
     // TODO: Compose appConfig via modules
     protected constructor(
         protected readonly config: TAppConfig
     ) {
-        this.app = express();
+        this.expressApp = express();
 
-        this.app.use(cors(this.config.corsOptions));
+        this.expressApp.use(cors(this.config.corsOptions));
 
 
         // TODO: Do this only when the ClientHostModule is used
-        this.app.use(express.static(this.config.clientAppDir));
+        this.expressApp.use(express.static(this.config.clientAppDir));
 
         // TODO: Do this only when the StaticFileHostModule is used
-        this.app.use(this.config.assetsRoute, express.static(this.config.assetsDir));
+        this.expressApp.use(this.config.assetsRoute, express.static(this.config.assetsDir));
 
-        this.app.use(bodyParser.urlencoded(this.config.bodyParserOptionsUrlEncoded));
-        this.app.use(bodyParser.json(this.config.bodyParserOptionsJson));
+        this.expressApp.use(bodyParser.urlencoded(this.config.bodyParserOptionsUrlEncoded));
+        this.expressApp.use(bodyParser.json(this.config.bodyParserOptionsJson));
     }
 
     start() {
-        this.init$(this.app).then(() => this.app.listen(this.config.port, () => {
+        this.init$(this.expressApp).then(() => this.expressApp.listen(this.config.port, () => {
             console.log(this.config.appName + " has started.");
         }));
     }

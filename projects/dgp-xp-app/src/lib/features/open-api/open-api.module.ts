@@ -1,11 +1,6 @@
 import { DgpXpModule } from "../../functions";
-import { Provider, Type } from "injection-js";
 import { OpenApiConfig } from "./models";
-
-export interface ModuleWithProviders<TModule> {
-    module: Type<TModule>;
-    providers?: Provider[];
-}
+import { ModuleWithProviders } from "../../models/module-with-providers.model";
 
 @DgpXpModule({})
 export class OpenApiModule {

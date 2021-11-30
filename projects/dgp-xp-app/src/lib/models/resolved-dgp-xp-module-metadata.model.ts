@@ -1,8 +1,6 @@
 import { Provider, Type } from "injection-js";
 
-export interface DgpXpModuleMetadata {
+export interface ResolvedDgpXpModuleMetadata {
     readonly controllers?: ReadonlyArray<Type>;
-    readonly imports?: ReadonlyArray<any>;
     readonly providers?: ReadonlyArray<Provider>;
 }
-
