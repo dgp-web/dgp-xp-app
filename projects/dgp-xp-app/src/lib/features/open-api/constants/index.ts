@@ -1,1 +1,0 @@
-export { OPEN_API_CONFIG } from "./open-api-config-injection-token.constant";

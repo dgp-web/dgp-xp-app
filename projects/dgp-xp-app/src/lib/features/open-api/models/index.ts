@@ -1,1 +1,0 @@
-export { OpenApiConfig } from "./open-api-config.model";
