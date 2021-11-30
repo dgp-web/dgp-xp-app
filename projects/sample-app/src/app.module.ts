@@ -1,8 +1,9 @@
-import { AuthenticationModule, DgpXpModule, HttpClientModule, SwaggerUiModule, TsoaEngineModule, InitializationModule } from "dgp-xp-app";
+import { AuthenticationModule, DgpXpModule, HttpClientModule, InitializationModule, SwaggerUiModule, TsoaEngineModule } from "dgp-xp-app";
 import { UserController } from "./app/controllers/user.controller";
 import * as path from "path";
 import { RegisterRoutes } from "../build/routes";
 import { http503ServiceUnavailableTemplate } from "./app/util/http-503-service-unavailable-template";
+
 
 @DgpXpModule({
     imports: [
@@ -19,7 +20,7 @@ import { http503ServiceUnavailableTemplate } from "./app/util/http-503-service-u
             initializationRequestHandler: (err, req, res) => {
                 res.status(503);
                 res.send(http503ServiceUnavailableTemplate);
-            }
+            } // TODO: add initializationServiceProvider for a service that performs startup tasks when configured
         })
     ],
     controllers: [
