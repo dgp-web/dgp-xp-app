@@ -5,17 +5,16 @@ import { RegisterRoutes } from "../build/routes";
 
 @DgpXpModule({
     imports: [
-        AuthenticationModule,
-        HttpClientModule,
+        TsoaEngineModule.forRoot({
+            registerRoutes: RegisterRoutes
+        }),
         SwaggerUiModule.forRoot({
             swaggerRoute: "/api/docs",
             swaggerJsonPath: path.join(__dirname, "../build/swagger.json")
         }),
-        TsoaEngineModule.forRoot({
-            registerRoutes: RegisterRoutes
-        })
+        HttpClientModule,
+        AuthenticationModule
     ],
-    providers: [],
     controllers: [
         UserController
     ]
