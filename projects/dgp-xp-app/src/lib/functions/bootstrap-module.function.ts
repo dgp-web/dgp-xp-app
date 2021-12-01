@@ -16,7 +16,6 @@ import { removeRouteHandler } from "./remove-route-handler.function";
 import { InitializationService } from "dgp-xp-app";
 
 // TODO: Check if ioc container can be integrated into this
-// TODO: Add authentication module
 
 export async function bootstrapModule<TModule extends Type>(
     payload: TModule

@@ -4,6 +4,9 @@ import * as path from "path";
 import { RegisterRoutes } from "../build/routes";
 import { http503ServiceUnavailableTemplate } from "./app/util/http-503-service-unavailable-template";
 import { initializationServiceProvider } from "./app/constants/initialization-service-provider.constant";
+import { authentication } from "./app/constants/authentication.constant";
+
+// TODO: EffectsModule, EntityDbModule
 
 @DgpXpModule({
     imports: [
@@ -15,7 +18,7 @@ import { initializationServiceProvider } from "./app/constants/initialization-se
             swaggerJsonPath: path.join(__dirname, "../build/swagger.json")
         }),
         HttpClientModule,
-        AuthenticationModule,
+        AuthenticationModule.forRoot(authentication),
         InitializationModule.forRoot({
             initializationRequestHandler: (err, req, res) => {
                 res.status(503);
