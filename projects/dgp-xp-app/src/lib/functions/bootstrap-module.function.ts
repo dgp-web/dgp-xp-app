@@ -91,7 +91,7 @@ export async function bootstrapModule<TModule extends Type>(
 
         if (initializationConfig.initializationServiceProvider) {
             const initializationService = rootInjector.get(initializationConfig.initializationServiceProvider.provide) as InitializationService;
-            await initializationService.initialize$();
+            await initializationService.initialize$(expressApp);
         }
 
     } catch (e) {
