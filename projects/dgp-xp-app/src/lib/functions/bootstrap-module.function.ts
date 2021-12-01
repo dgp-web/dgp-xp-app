@@ -1,4 +1,4 @@
-import { ReflectiveInjector, Type } from "injection-js";
+import { Provider, ReflectiveInjector, Type } from "injection-js";
 import { getNestedDgpXpModuleMetadata } from "./get-nested-dgp-xp-module-metadata.function";
 import * as express from "express";
 import { Application } from "express";
@@ -15,6 +15,8 @@ import {
 import * as swaggerUi from "swagger-ui-express";
 import { removeRouteHandler } from "./remove-route-handler.function";
 import { APPLICATION } from "../constants";
+
+export const additionalProviders = new Array<Provider>();
 
 export async function bootstrapModule<TModule extends Type>(
     payload: TModule
@@ -35,6 +37,7 @@ export async function bootstrapModule<TModule extends Type>(
     let rootInjector = ReflectiveInjector.resolveAndCreate([{
         provide: APPLICATION, useValue: expressApp
     },
+        ...additionalProviders,
         ...metadata.providers,
         ...metadata.controllers
     ]);
