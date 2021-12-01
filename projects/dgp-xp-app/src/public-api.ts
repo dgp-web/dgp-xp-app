@@ -18,3 +18,4 @@ export { Credentials } from "./lib/features/authentication/models/credentials.mo
 export { removeRouteHandler } from "./lib/functions/remove-route-handler.function";
 export { ErrorHandler } from "./lib/models/error-handler.model";
 export { ERROR_HANDLER } from "./lib/constants/error-handler-injection-token.constant";
+export { iocContainer } from "./lib/ioc-container";

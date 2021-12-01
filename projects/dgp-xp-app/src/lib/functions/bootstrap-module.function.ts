@@ -1,4 +1,4 @@
-import { Provider, ReflectiveInjector, Type } from "injection-js";
+import { ReflectiveInjector, Type } from "injection-js";
 import { getNestedDgpXpModuleMetadata } from "./get-nested-dgp-xp-module-metadata.function";
 import * as express from "express";
 import { Application } from "express";
@@ -6,6 +6,7 @@ import { setRootInjector } from "./root-injector.functions";
 import {
     INITIALIZATION_CONFIG,
     InitializationConfig,
+    InitializationService,
     SWAGGER_UI_CONFIG,
     SwaggerUiConfig,
     TSOA_ENGINE_CONFIG,
@@ -13,9 +14,7 @@ import {
 } from "../features";
 import * as swaggerUi from "swagger-ui-express";
 import { removeRouteHandler } from "./remove-route-handler.function";
-import { InitializationService } from "dgp-xp-app";
-
-// TODO: Check if ioc container can be integrated into this
+import { APPLICATION } from "../constants";
 
 export async function bootstrapModule<TModule extends Type>(
     payload: TModule
@@ -33,12 +32,11 @@ export async function bootstrapModule<TModule extends Type>(
      * Create data handling
      */
 
-    const providers: Array<Provider> = [
-        ...metadata.providers, ...metadata.controllers
-    ];
-
-    let rootInjector = ReflectiveInjector.resolveAndCreate([
-        ...metadata.providers, ...metadata.controllers
+    let rootInjector = ReflectiveInjector.resolveAndCreate([{
+        provide: APPLICATION, useValue: expressApp
+    },
+        ...metadata.providers,
+        ...metadata.controllers
     ]);
 
     setRootInjector(rootInjector);
