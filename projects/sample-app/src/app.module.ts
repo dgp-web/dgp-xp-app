@@ -3,7 +3,7 @@ import { UserController } from "./app/controllers/user.controller";
 import * as path from "path";
 import { RegisterRoutes } from "../build/routes";
 import { http503ServiceUnavailableTemplate } from "./app/util/http-503-service-unavailable-template";
-
+import { initializationServiceProvider } from "./app/constants/initialization-service-provider.constant";
 
 @DgpXpModule({
     imports: [
@@ -20,7 +20,8 @@ import { http503ServiceUnavailableTemplate } from "./app/util/http-503-service-u
             initializationRequestHandler: (err, req, res) => {
                 res.status(503);
                 res.send(http503ServiceUnavailableTemplate);
-            } // TODO: add initializationServiceProvider for a service that performs startup tasks when configured
+            },
+            initializationServiceProvider
         })
     ],
     controllers: [

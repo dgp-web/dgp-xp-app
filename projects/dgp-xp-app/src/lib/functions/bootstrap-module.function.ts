@@ -1,4 +1,4 @@
-import { ReflectiveInjector, Type } from "injection-js";
+import { Provider, ReflectiveInjector, Type } from "injection-js";
 import { getNestedDgpXpModuleMetadata } from "./get-nested-dgp-xp-module-metadata.function";
 import * as express from "express";
 import { Application } from "express";
@@ -13,6 +13,7 @@ import {
 } from "../features";
 import * as swaggerUi from "swagger-ui-express";
 import { removeRouteHandler } from "./remove-route-handler.function";
+import { InitializationService } from "dgp-xp-app";
 
 // TODO: Check if ioc container can be integrated into this
 // TODO: Add authentication module
@@ -33,7 +34,11 @@ export async function bootstrapModule<TModule extends Type>(
      * Create data handling
      */
 
-    const rootInjector = ReflectiveInjector.resolveAndCreate([
+    const providers: Array<Provider> = [
+        ...metadata.providers, ...metadata.controllers
+    ];
+
+    let rootInjector = ReflectiveInjector.resolveAndCreate([
         ...metadata.providers, ...metadata.controllers
     ]);
 
@@ -48,6 +53,11 @@ export async function bootstrapModule<TModule extends Type>(
         if (initializationConfig.initializationRequestHandler) {
             expressApp.use("*", initializationConfig.initializationRequestHandler);
         }
+
+        if (initializationConfig.initializationServiceProvider) {
+            rootInjector = ReflectiveInjector.resolveAndCreate([initializationConfig.initializationServiceProvider], rootInjector);
+        }
+
     } catch (e) {
         console.error(e);
     }
@@ -76,6 +86,17 @@ export async function bootstrapModule<TModule extends Type>(
         console.error(e);
     }
 
+    try {
+        const initializationConfig = rootInjector.get(INITIALIZATION_CONFIG) as InitializationConfig;
+
+        if (initializationConfig.initializationServiceProvider) {
+            const initializationService = rootInjector.get(initializationConfig.initializationServiceProvider.provide) as InitializationService;
+            await initializationService.initialize$();
+        }
+
+    } catch (e) {
+        console.error(e);
+    }
 
     try {
         const initializationConfig = rootInjector.get(INITIALIZATION_CONFIG) as InitializationConfig;
