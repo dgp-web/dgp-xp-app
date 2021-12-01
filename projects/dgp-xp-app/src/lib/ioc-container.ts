@@ -1,5 +1,5 @@
 import { IocContainer, IocContainerFactory } from "@tsoa/runtime";
-import { getRootInjector } from "./root-injector";
+import { getRootInjector } from "./functions";
 
 export class Container implements IocContainer {
 

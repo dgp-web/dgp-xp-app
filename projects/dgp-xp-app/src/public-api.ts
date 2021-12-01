@@ -1,9 +1,21 @@
-export * from "./lib/authentication-scheme.model";
+export * from "./lib/features";
+export * from "./lib/functions";
+export * from "./lib/models";
+
 export * from "./lib/create-sse-middleware.function";
-export * from "./lib/credentials.model";
 export * from "./lib/decode-basic-auth-header.function";
 export * from "./lib/dgp-xp-app";
-export * from "./lib/error-handler";
+export * from "./lib/functions/error-handler";
 export * from "./lib/ioc-container";
-export * from "./lib/remove-route-handler.function";
-export * from "./lib/root-injector";
+export * from "./lib/functions/root-injector.functions";
+export { Environment } from "./lib/models/environment.model";
+export { AppConfig } from "./lib/models/app-config.model";
+export { InitializationRequestHandler } from "./lib/models/initialization-request-handler.model";
+export { defaultAppConfig } from "./lib/constants/default-app-config.constant";
+export { AuthenticationScheme } from "./lib/features/authentication/models/authentication-scheme.model";
+export { Authentication } from "./lib/features/authentication/models/authentication.model";
+export { Credentials } from "./lib/features/authentication/models/credentials.model";
+export { removeRouteHandler } from "./lib/functions/remove-route-handler.function";
+export { ErrorHandler } from "./lib/models/error-handler.model";
+export { ERROR_HANDLER } from "./lib/constants/error-handler-injection-token.constant";
+export { iocContainer } from "./lib/ioc-container";

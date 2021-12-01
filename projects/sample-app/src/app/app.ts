@@ -6,7 +6,7 @@ import { initializationRequestHandler } from "./util/initialization-request-hand
 import { removeStartupRoute } from "./util/remove-startup-route.function";
 import { UserController } from "./controllers/user.controller";
 import { RegisterRoutes } from "../../build/routes";
-import { setRootInjector } from "../../../dgp-xp-app/src/public-api";
+import { setRootInjector } from "dgp-xp-app";
 import express = require("express");
 import bodyParser = require("body-parser");
 

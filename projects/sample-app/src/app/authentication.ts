@@ -1,4 +1,5 @@
 import * as express from "express";
+import { AUTHENTICATION_SCHEME, AuthenticationScheme, getRootInjector } from "dgp-xp-app";
 
 /*
  * Info: This name is a convention that TSOA
@@ -10,6 +11,12 @@ export function expressAuthentication(
     securityName: string,
     scopes?: string[]
 ): Promise<any> {
+
+    const authentication = getRootInjector().get(AUTHENTICATION_SCHEME) as AuthenticationScheme
+
+    console.log("Got authentication: ", authentication);
+    console.log(securityName);
+    console.log(scopes);
 
     return Promise.resolve();
 
