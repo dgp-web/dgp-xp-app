@@ -4,6 +4,7 @@
     "align": false,
     "array-type": false,
     "arrow-parens": false,
+    "ban-types": false,
     "curly": false,
     "deprecation": {
       "severity": "warning"

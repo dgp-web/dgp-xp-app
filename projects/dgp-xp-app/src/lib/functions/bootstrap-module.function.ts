@@ -16,7 +16,7 @@ import {
 } from "../features";
 import * as swaggerUi from "swagger-ui-express";
 import { removeRouteHandler } from "./remove-route-handler.function";
-import { APPLICATION } from "../constants";
+import { EXPRESS_APPLICATION } from "../constants";
 import { STATIC_FILES_CONFIG, StaticFilesConfig } from "../features/static-files";
 
 export const additionalProviders = new Array<Provider>();
@@ -38,7 +38,7 @@ export async function bootstrapModule<TModule extends Type>(
      */
 
     let rootInjector = ReflectiveInjector.resolveAndCreate([{
-        provide: APPLICATION, useValue: expressApp
+        provide: EXPRESS_APPLICATION, useValue: expressApp
     },
         ...additionalProviders,
         ...metadata.providers,
