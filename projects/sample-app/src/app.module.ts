@@ -2,6 +2,7 @@ import {
     DgpXpModule,
     ExpressMiddlewareModule,
     HttpClientModule,
+    StaticFilesModule,
     SwaggerUiExpressModule,
     TsoaEngineModule,
     TsoaExpressAuthenticationModule
@@ -31,6 +32,10 @@ import { configurationServiceProvider } from "./app/constants/configuration-serv
         SwaggerUiExpressModule.forRoot({
             swaggerRoute: "/api/docs",
             swaggerJsonPath: path.join(__dirname, "../build/swagger.json")
+        }),
+        StaticFilesModule.forRoot({
+            route: "/assets",
+            staticFilesDirectory: path.join(__dirname, "./assets")
         }),
         HttpClientModule
     ],
