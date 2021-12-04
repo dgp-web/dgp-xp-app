@@ -1,7 +1,7 @@
 import {
     DgpXpModule,
     HttpClientModule,
-    InitializationModule,
+    ExpressMiddlewareModule,
     SwaggerUiExpressModule,
     TsoaEngineModule,
     TsoaExpressAuthenticationModule
@@ -24,7 +24,7 @@ import {authentication} from "./app/constants/authentication.constant";
             swaggerJsonPath: path.join(__dirname, "../build/swagger.json")
         }),
         HttpClientModule,
-        InitializationModule.forRoot({
+        ExpressMiddlewareModule.forRoot({
             initializationRequestHandler: (err, req, res) => {
                 res.status(503);
                 res.send(http503ServiceUnavailableTemplate);

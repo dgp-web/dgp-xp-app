@@ -4,9 +4,9 @@ import * as express from "express";
 import { Application } from "express";
 import { setRootInjector } from "./root-injector.functions";
 import {
-    INITIALIZATION_CONFIG,
-    InitializationConfig,
-    InitializationService,
+    EXPRESS_MIDDLEWARE_CONFIG,
+    ExpressMiddlewareConfig,
+    ExpressInitializationService,
     SWAGGER_UI_EXPRESS_CONFIG,
     SwaggerUiExpressConfig,
     TSOA_ENGINE_CONFIG,
@@ -49,7 +49,7 @@ export async function bootstrapModule<TModule extends Type>(
     });
 
     try {
-        const initializationConfig = rootInjector.get(INITIALIZATION_CONFIG) as InitializationConfig;
+        const initializationConfig = rootInjector.get(EXPRESS_MIDDLEWARE_CONFIG) as ExpressMiddlewareConfig;
         if (initializationConfig.initializationRequestHandler) {
             expressApp.use("*", initializationConfig.initializationRequestHandler);
         }
@@ -87,10 +87,10 @@ export async function bootstrapModule<TModule extends Type>(
     }
 
     try {
-        const initializationConfig = rootInjector.get(INITIALIZATION_CONFIG) as InitializationConfig;
+        const initializationConfig = rootInjector.get(EXPRESS_MIDDLEWARE_CONFIG) as ExpressMiddlewareConfig;
 
         if (initializationConfig.initializationServiceProvider) {
-            const initializationService = rootInjector.get(initializationConfig.initializationServiceProvider.provide) as InitializationService;
+            const initializationService = rootInjector.get(initializationConfig.initializationServiceProvider.provide) as ExpressInitializationService;
             await initializationService.initialize$(expressApp);
         }
 
@@ -99,7 +99,7 @@ export async function bootstrapModule<TModule extends Type>(
     }
 
     try {
-        const initializationConfig = rootInjector.get(INITIALIZATION_CONFIG) as InitializationConfig;
+        const initializationConfig = rootInjector.get(EXPRESS_MIDDLEWARE_CONFIG) as ExpressMiddlewareConfig;
         removeRouteHandler(expressApp, initializationConfig.initializationRequestHandler.name);
     } catch (e) {
         console.error(e);
