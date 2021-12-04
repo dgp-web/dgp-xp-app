@@ -52,19 +52,19 @@ export async function bootstrapModule<TModule extends Type>(
     });
 
     try {
+        const staticFilesConfig = rootInjector.get(STATIC_FILES_CONFIG) as StaticFilesConfig;
+        expressApp.use(staticFilesConfig.route, express.static(staticFilesConfig.staticFilesDirectory));
+    } catch (e) {
+        console.error(e);
+    }
+
+    try {
         const clientHostConfig = rootInjector.get(CLIENT_HOST_CONFIG) as ClientHostConfig;
         if (clientHostConfig.route) {
             expressApp.use(clientHostConfig.route, express.static(clientHostConfig.clientDirectory));
         } else {
             expressApp.use(express.static(clientHostConfig.clientDirectory));
         }
-    } catch (e) {
-        console.error(e);
-    }
-
-    try {
-        const staticFilesConfig = rootInjector.get(STATIC_FILES_CONFIG) as StaticFilesConfig;
-        expressApp.use(staticFilesConfig.route, express.static(staticFilesConfig.staticFilesDirectory));
     } catch (e) {
         console.error(e);
     }
