@@ -4,6 +4,8 @@ import * as express from "express";
 import { Application } from "express";
 import { setRootInjector } from "./root-injector.functions";
 import {
+    CLIENT_HOST_CONFIG,
+    ClientHostConfig,
     EXPRESS_MIDDLEWARE_CONFIG,
     ExpressInitializationService,
     ExpressMiddlewareConfig,
@@ -48,6 +50,17 @@ export async function bootstrapModule<TModule extends Type>(
     metadata.controllers.forEach(controller => {
         rootInjector.resolveAndInstantiate(controller);
     });
+
+    try {
+        const clientHostConfig = rootInjector.get(CLIENT_HOST_CONFIG) as ClientHostConfig;
+        if (clientHostConfig.route) {
+            expressApp.use(clientHostConfig.route, express.static(clientHostConfig.clientDirectory));
+        } else {
+            expressApp.use(express.static(clientHostConfig.clientDirectory));
+        }
+    } catch (e) {
+        console.error(e);
+    }
 
     try {
         const staticFilesConfig = rootInjector.get(STATIC_FILES_CONFIG) as StaticFilesConfig;
@@ -102,6 +115,21 @@ export async function bootstrapModule<TModule extends Type>(
             await initializationService.initialize$(expressApp);
         }
 
+    } catch (e) {
+        console.error(e);
+    }
+
+    try {
+        const clientHostConfig = rootInjector.get(CLIENT_HOST_CONFIG) as ClientHostConfig;
+        if (clientHostConfig.route) {
+            expressApp.get(clientHostConfig.route + "/*", (req, res) => {
+                res.sendFile(clientHostConfig.clientDirectory + "/index.html");
+            });
+        } else {
+            expressApp.get("/*", (req, res) => {
+                res.sendFile(clientHostConfig.clientDirectory + "/index.html");
+            });
+        }
     } catch (e) {
         console.error(e);
     }
