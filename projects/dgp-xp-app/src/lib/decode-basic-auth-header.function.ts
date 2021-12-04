@@ -1,4 +1,4 @@
-import { Credentials } from "./features/authentication/models/credentials.model";
+import { Credentials } from "./features/tsoa-express-authentication/models/credentials.model";
 
 const crypto = require("crypto");
 
