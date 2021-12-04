@@ -1,7 +1,7 @@
-import { InitializationService, InitializationServiceProvider } from "dgp-xp-app";
+import { ExpressInitializationService, ExpressInitializationServiceProvider } from "dgp-xp-app";
 import { InitializationServiceImpl } from "../services/initialization.service";
 
-export const initializationServiceProvider: InitializationServiceProvider = {
-    provide: InitializationService,
+export const initializationServiceProvider: ExpressInitializationServiceProvider = {
+    provide: ExpressInitializationService,
     useClass: InitializationServiceImpl
 };

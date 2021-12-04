@@ -1,7 +1,7 @@
 import { Environment } from "./environment.model";
 import { SwaggerUiOptions } from "swagger-ui-express";
 import { OptionsJson, OptionsUrlencoded } from "body-parser";
-import { InitializationConfig } from "../features/initialization/models/initialization-config.model";
+import { ExpressMiddlewareConfig } from "../features/express-middleware/models/express-middleware-config";
 
 export interface OpenApiConfig {
     readonly swaggerUIOptions: SwaggerUiOptions;
@@ -37,7 +37,7 @@ export interface WithCorsOptions {
 
 export interface AppConfig extends AppMetadata,
     WithCorsOptions,
-    InitializationConfig,
+    ExpressMiddlewareConfig,
     ClientHost,
     Environment,
     OpenApiConfig,

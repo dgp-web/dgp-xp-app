@@ -1,12 +1,12 @@
 import * as express from "express";
 import { Observable } from "rxjs";
-import { Authentication } from "./features/authentication/models";
+import { TsoaExpressAuthentication } from "./features/tsoa-express-authentication/models";
 
 export interface SSEMiddleWareConfig {
     readonly headers: {
         readonly "Access-Control-Allow-Origin": string;
     };
-    readonly authentication?: Authentication;
+    readonly authentication?: TsoaExpressAuthentication;
     readonly securityName?: string;
     readonly scopes?: string[];
 }
