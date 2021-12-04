@@ -1,9 +1,8 @@
-import { platformExpress } from "dgp-xp-app";
+import {platformServer} from "dgp-xp-app";
 import "./polyfills";
-import { AppModule } from "./app.module";
-// TODO: platformExpress([<providers> for AppConfig])
+import {AppModule} from "./app.module";
 // TODO: ConfigurationService configure$(app: Application)
 
-platformExpress([])
+platformServer([])
     .bootstrapModule(AppModule)
     .then(() => console.log("Sample app has started."));
