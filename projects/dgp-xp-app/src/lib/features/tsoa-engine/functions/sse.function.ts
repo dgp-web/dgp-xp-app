@@ -27,6 +27,8 @@ export function registerSSEMiddleware(payload: {
 
 export function SSE(route: string, config: SSEMiddleWareConfig): Function {
 
+    // TODO: Get authenicationInfo from other decorator!
+
     return (decoratedClass: Function,
             propertyKey: string,
             descriptor: PropertyDescriptor
@@ -35,10 +37,16 @@ export function SSE(route: string, config: SSEMiddleWareConfig): Function {
         const originalMethod = descriptor.value;
 
         descriptor.value = function (...args: any[]) {
-            const result = originalMethod.apply(this, args) as Observable<any>;
-            const obs$ = result;
+            const obs$ = originalMethod.apply(this, args) as Observable<any>;
+            // TODO: Check if the result is an observable
             registerSSEMiddleware({obs$, config, route});
-            return result;
+            /**
+             * We do not return the Observable result of the original method here so the
+             * request doesn't complete.
+             *
+             * Instead, we pipe results through an sse response.
+             */
+            return;
         };
 
         return;
