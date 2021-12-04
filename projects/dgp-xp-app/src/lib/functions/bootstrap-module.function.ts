@@ -5,8 +5,8 @@ import { Application } from "express";
 import { setRootInjector } from "./root-injector.functions";
 import {
     EXPRESS_MIDDLEWARE_CONFIG,
-    ExpressMiddlewareConfig,
     ExpressInitializationService,
+    ExpressMiddlewareConfig,
     SWAGGER_UI_EXPRESS_CONFIG,
     SwaggerUiExpressConfig,
     TSOA_ENGINE_CONFIG,
@@ -15,6 +15,7 @@ import {
 import * as swaggerUi from "swagger-ui-express";
 import { removeRouteHandler } from "./remove-route-handler.function";
 import { APPLICATION } from "../constants";
+import { STATIC_FILES_CONFIG, StaticFilesConfig } from "../features/static-files";
 
 export const additionalProviders = new Array<Provider>();
 
@@ -47,6 +48,13 @@ export async function bootstrapModule<TModule extends Type>(
     metadata.controllers.forEach(controller => {
         rootInjector.resolveAndInstantiate(controller);
     });
+
+    try {
+        const staticFilesConfig = rootInjector.get(STATIC_FILES_CONFIG) as StaticFilesConfig;
+        expressApp.use(staticFilesConfig.route, express.static(staticFilesConfig.staticFilesDirectory));
+    } catch (e) {
+        console.error(e);
+    }
 
     try {
         const initializationConfig = rootInjector.get(EXPRESS_MIDDLEWARE_CONFIG) as ExpressMiddlewareConfig;
