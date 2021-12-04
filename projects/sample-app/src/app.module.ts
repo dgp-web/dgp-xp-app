@@ -1,4 +1,5 @@
 import {
+    ClientHostModule,
     DgpXpModule,
     ExpressMiddlewareModule,
     HttpClientModule,
@@ -36,6 +37,9 @@ import { configurationServiceProvider } from "./app/constants/configuration-serv
         StaticFilesModule.forRoot({
             route: "/assets",
             staticFilesDirectory: path.join(__dirname, "./assets")
+        }),
+        ClientHostModule.forRoot( {
+            clientDirectory: path.join(__dirname, "../client")
         }),
         HttpClientModule
     ],
