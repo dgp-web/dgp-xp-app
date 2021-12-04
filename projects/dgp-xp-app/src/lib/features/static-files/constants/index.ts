@@ -1,0 +1,1 @@
+export { STATIC_FILES_CONFIG } from "./static-files-config-injection-token.constant";

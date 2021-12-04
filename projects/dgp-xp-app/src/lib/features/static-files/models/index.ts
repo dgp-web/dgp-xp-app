@@ -1,0 +1,1 @@
+export { StaticFilesConfig } from "./static-files-config.model";
