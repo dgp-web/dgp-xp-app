@@ -1,0 +1,1 @@
+export { SwaggerUiExpressConfig } from "./swagger-ui-express-config.model";

@@ -2,7 +2,7 @@ import {
     DgpXpModule,
     HttpClientModule,
     InitializationModule,
-    SwaggerUiModule,
+    SwaggerUiExpressModule,
     TsoaEngineModule,
     TsoaExpressAuthenticationModule
 } from "dgp-xp-app";
@@ -19,7 +19,7 @@ import {authentication} from "./app/constants/authentication.constant";
             registerRoutes: RegisterRoutes
         }),
         TsoaExpressAuthenticationModule.forRoot(authentication),
-        SwaggerUiModule.forRoot({
+        SwaggerUiExpressModule.forRoot({
             swaggerRoute: "/api/docs",
             swaggerJsonPath: path.join(__dirname, "../build/swagger.json")
         }),

@@ -7,8 +7,8 @@ import {
     INITIALIZATION_CONFIG,
     InitializationConfig,
     InitializationService,
-    SWAGGER_UI_CONFIG,
-    SwaggerUiConfig,
+    SWAGGER_UI_EXPRESS_CONFIG,
+    SwaggerUiExpressConfig,
     TSOA_ENGINE_CONFIG,
     TsoaEngineConfig
 } from "../features";
@@ -66,7 +66,7 @@ export async function bootstrapModule<TModule extends Type>(
      * tryAddOpenApiToApp$
      */
     try {
-        const openApiConfig = rootInjector.get(SWAGGER_UI_CONFIG) as SwaggerUiConfig
+        const openApiConfig = rootInjector.get(SWAGGER_UI_EXPRESS_CONFIG) as SwaggerUiExpressConfig
         const swaggerJson = await import (openApiConfig.swaggerJsonPath)
 
         expressApp.use(openApiConfig.swaggerRoute, swaggerUi.serve,

@@ -1,6 +1,6 @@
 import { SwaggerUiOptions } from "swagger-ui-express";
 
-export interface SwaggerUiConfig extends SwaggerUiOptions {
+export interface SwaggerUiExpressConfig extends SwaggerUiOptions {
     readonly swaggerRoute: string;
     readonly swaggerJsonPath: string;
 }

@@ -1,0 +1,1 @@
+export { SWAGGER_UI_EXPRESS_CONFIG } from "./swagger-ui-config-injection-token.constant";

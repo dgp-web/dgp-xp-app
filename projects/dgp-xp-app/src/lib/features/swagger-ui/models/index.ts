@@ -1,1 +1,0 @@
-export { SwaggerUiConfig } from "./swagger-ui-config.model";
