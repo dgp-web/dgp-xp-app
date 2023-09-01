@@ -1,5 +1,7 @@
 import * as express from "express";
 import { Application } from "express";
+import * as http from "http";
+import { Server } from "http";
 import * as cors from "cors";
 import { CorsOptions } from "cors";
 import * as swaggerUi from "swagger-ui-express";
@@ -45,12 +47,14 @@ export const defaultAppConfig = {
 
 export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
 
-    private app: Application;
+    protected app: Application;
+    protected server: Server;
 
-    protected constructor(
+    constructor(
         protected readonly config: TAppConfig
     ) {
         this.app = express();
+        this.server = http.createServer(this.app);
 
         this.app.use(cors(this.config.corsOptions));
 
@@ -61,7 +65,7 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
     }
 
     start() {
-        this.init$(this.app).then(() => this.app.listen(this.config.port, () => {
+        this.init$(this.app).then(() => this.server.listen(this.config.port, () => {
             console.log(this.config.appName + " has started.");
         }));
     }
