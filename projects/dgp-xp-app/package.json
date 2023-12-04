@@ -1,6 +1,6 @@
 {
   "name": "dgp-xp-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "private": false,
   "main": "public-api.js",
@@ -9,6 +9,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "injection-js": "^2.4.0",
-    "tsoa": "^3.4.0"
+    "tsoa": "^5"
   }
 }
