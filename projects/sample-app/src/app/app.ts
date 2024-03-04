@@ -4,6 +4,7 @@ import { Application } from "express";
 import { UserController } from "./controllers/user.controller";
 import { RegisterRoutes } from "../../build/routes";
 import { DgpXpApp, setRootInjector } from "dgp-xp-app";
+import { UserService } from "./services/user.service";
 
 export class App extends DgpXpApp<DemoAppConfig> {
 
@@ -12,7 +13,8 @@ export class App extends DgpXpApp<DemoAppConfig> {
     async initialize$(app: Application) {
 
         this.rootInjector = ReflectiveInjector.resolveAndCreate([
-            UserController
+            UserController,
+            UserService
         ]);
 
         setRootInjector(this.rootInjector);
