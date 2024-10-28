@@ -1,3 +1,3 @@
 import { createDefaultErrorHandler } from "./functions";
 
-export const errorHandler = createDefaultErrorHandler;
+export const errorHandler = createDefaultErrorHandler();

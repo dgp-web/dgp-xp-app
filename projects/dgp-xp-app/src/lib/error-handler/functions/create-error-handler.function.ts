@@ -6,7 +6,7 @@ export function createErrorHandler(payload: {
     readonly errorChecks: ReadonlyArray<ErrorCheck>;
 }): ErrorHandler {
 
-    const cases = payload.errorChecks;
+    const errorChecks = payload.errorChecks;
 
     return (
         err: unknown,
@@ -15,10 +15,10 @@ export function createErrorHandler(payload: {
         next: express.NextFunction
     ): express.Response | void => {
 
-        for (let i = 0; i < cases.length; i++) {
-            const errorCase = cases[i];
+        for (let i = 0; i < errorChecks.length; i++) {
+            const errorCheck = errorChecks[i];
 
-            const result = errorCase({err, req, res, next});
+            const result = errorCheck({err, req, res, next});
             if (result.hasHandledError) {
                 return res.status(result.status).json(result.result);
             }
