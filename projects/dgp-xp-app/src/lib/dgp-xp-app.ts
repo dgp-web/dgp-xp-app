@@ -7,7 +7,7 @@ import { CorsOptions } from "cors";
 import * as swaggerUi from "swagger-ui-express";
 import { SwaggerUiOptions } from "swagger-ui-express";
 import { OptionsJson, OptionsUrlencoded } from "body-parser";
-import { errorHandler } from "./error-handler";
+import { errorHandler } from "./error-handler/error-handler";
 import { removeRouteHandler } from "./remove-route-handler.function";
 import { isNullOrUndefined } from "util";
 import bodyParser = require("body-parser");
