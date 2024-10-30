@@ -10,6 +10,7 @@ import { OptionsJson, OptionsUrlencoded } from "body-parser";
 import { errorHandler } from "./error-handler/error-handler";
 import { removeRouteHandler } from "./remove-route-handler.function";
 import { isNullOrUndefined } from "util";
+import { ErrorHandler } from "./error-handler/models";
 import bodyParser = require("body-parser");
 
 export type InitializationRequestHandler = (err: unknown, req: express.Request,
@@ -28,6 +29,7 @@ export interface AppConfig {
     readonly port: number;
     readonly corsOptions: CorsOptions;
     readonly initializationRequestHandler: InitializationRequestHandler;
+    readonly errorHandler: ErrorHandler;
 }
 
 export const defaultAppConfig = {
@@ -42,7 +44,8 @@ export const defaultAppConfig = {
         limit: "50mb"
     },
     bodyParserOptionsUrlEncoded: {extended: true},
-    port: 3000
+    port: 3000,
+    errorHandler
 } as AppConfig;
 
 export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
@@ -82,7 +85,7 @@ export abstract class DgpXpApp<TAppConfig extends AppConfig = AppConfig> {
             });
 
         await this.initialize$(app);
-        app.use(errorHandler);
+        app.use(this.config.errorHandler);
 
         app.get("/*", (req, res) => {
             res.sendFile(this.config.clientAppDir + "/index.html");
